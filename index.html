@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
     />
+    <script src="./scripts/tela2.js"></script>
   </head>
   <body>
     <header>
@@ -21,51 +22,52 @@
     <main class="app">
       <div class="container-tela2">
         <div class="cabeçalho-tela2">
-          <img src="./imagens/Rectangle42.png">
-          <h2 class="titulo-quizz">O quão Potterhead é você?</h2>
+          <p class="titulo-quizz">O quão Potterhead é você?</p>
         </div>
-        <div class="container-quizz">
+        <div class="container-quizz" id="primeiro">
           <div class="container-pergunta">
             <div class="pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
           </div>
-          <div class="resposta1">
+          <div onclick="receberResposta(this)" class="resposta resposta1 errada">
             <img src="./imagens/image3.png">
             <p class="titulo-img">Gatíneo</p>
           </div>
-          <div class="resposta2">
+          <div onclick="receberResposta(this)" class="resposta resposta2 errada">
             <img src="./imagens/image4.png">
             <p class="titulo-img">Ratata</p>
           </div>
-          <div class="resposta3">
+          <div onclick="receberResposta(this)" class="resposta resposta3 errada">
             <img src="./imagens/image7.png">
             <p class="titulo-img">Sapo Gordo</p>
           </div>
-          <div class="resposta4">
+          <div onclick="receberResposta(this)" class="resposta resposta4 correta">
             <img src="./imagens/image8.png">
             <p class="titulo-img">Mustela putorius (o Furão)</p>
           </div>
         </div>
-        <div class="container-quizz">
-          <div class="container-pergunta">
-            <div class="pergunta">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
+        <div class="container-quizz" id="segundo">
+          <div class="container-pergunta2">
+            <div class="pergunta">Qual dos objetos abaixo NÃO é uma horcrux?</div>
           </div>
-          <div class="resposta1">
+          <div onclick="receberResposta2(this)" class="resposta resposta1 errada">
             <img src="./imagens/image3.png">
             <p class="titulo-img">Gatíneo</p>
           </div>
-          <div class="resposta2">
+          <div onclick="receberResposta2(this)" class="resposta resposta2 errada">
             <img src="./imagens/image4.png">
             <p class="titulo-img">Ratata</p>
           </div>
-          <div class="resposta3">
+          <div onclick="receberResposta2(this)" class="resposta resposta3 errada">
             <img src="./imagens/image7.png">
             <p class="titulo-img">Sapo Gordo</p>
           </div>
-          <div class="resposta4">
+          <div onclick="receberResposta2(this)" class="resposta resposta4 correta">
             <img src="./imagens/image8.png">
             <p class="titulo-img">Mustela putorius (o Furão)</p>
           </div>
         </div>
+        
+        
       </div>
     </main>
   </body>
