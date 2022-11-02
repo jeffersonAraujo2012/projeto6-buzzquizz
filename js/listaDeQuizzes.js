@@ -1,4 +1,6 @@
 //VIEW
+const app = document.querySelector(".app");
+app.innerHTML = "";
 
 //Solicita ao servidor as informações dos quizzes
 const promiseQuizzes = axios.get(
@@ -8,13 +10,12 @@ promiseQuizzes.then((res) => {
   viewMeusQuizzes();
   viewCardQuiz(res.data);
 });
-promiseQuizzes.catch(
+promiseQuizzes.catch(() =>
   console.log("Algo de errado ocorreu na requisição dos quizzes")
 );
 
 //Funcao que renderiza a seçao 'meus quizzes'
 function viewMeusQuizzes() {
-  const app = document.querySelector(".app");
   const meusQuizzesSection = document.createElement("section");
   meusQuizzesSection.classList.add("meus-quizzes");
 
@@ -34,7 +35,6 @@ function viewMeusQuizzes() {
 
 //Função que renderiza os cards dos quizzes e seçao 'todos os quizzes'
 function viewCardQuiz(quizzes) {
-  const app = document.querySelector(".app"); //captura a app area
   const todosOsQuizzes = document.createElement("section"); //captura a area dos quizzes
   todosOsQuizzes.classList.add("todos-os-quizzes"); //adiciona a classe
   todosOsQuizzes.innerHTML = /*HTML*/ `
