@@ -63,6 +63,7 @@ function clickCardQuizController() {
 }
 
 function btnAddQuizClickController() {
+  infoBasica();
   console.log("btnAddQuizClickController");
 }
 
