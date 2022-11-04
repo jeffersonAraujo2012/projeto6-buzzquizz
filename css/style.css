@@ -43,7 +43,6 @@ main.app {
 }
 
 .cabeçalho-tela2 {
-  position: relative;
   min-width: 750px;
   height: 150px;
   background-repeat: no-repeat;
@@ -51,10 +50,6 @@ main.app {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-}
-
-.opacidade{
 }
 
 .titulo-quizz {
@@ -67,7 +62,7 @@ main.app {
 .container-quizz{
   background-color: #ffffff;
   width: 750px;
-  margin-top: 42px;
+  margin: 42px auto 0 auto;
   padding: 28px 35px 0px 35px;
   display: flex;
   flex-wrap: wrap;
