@@ -38,26 +38,23 @@ header h1 {
 }
 
 main.app {
-  margin-top: 70px;
+  margin: 70px auto 0px auto;
   max-width: 1080px;
 }
 
 .cabeçalho-tela2 {
-  background-color: #EC362D;
   position: relative;
   min-width: 750px;
   height: 150px;
-  background-image: url(../imagens/Rectangle34.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
-.imagem-titulo{
-  object-fit: cover;
-  object-position: center;
+.opacidade{
 }
 
 .titulo-quizz {
@@ -70,28 +67,17 @@ main.app {
 .container-quizz{
   background-color: #ffffff;
   width: 750px;
-  margin: 42px auto 0 auto;
+  margin-top: 42px;
   padding: 28px 35px 0px 35px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
 .container-pergunta{
-  background-color: #434CA0;
   width: 100%;
-  height: 138px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container-pergunta2{
-  background-color: #A0438D;
-  width: 100%;
-  height: 138px;
+  height: 100px;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -114,6 +100,10 @@ main.app {
 
 .resposta {
   position: relative;
+}
+.resposta img{
+  width: 330px;
+  height: 175px;
 }
 
 .resposta-errada{

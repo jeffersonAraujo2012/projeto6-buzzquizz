@@ -40,17 +40,18 @@ function viewCardQuiz(quizzes) {
   todosOsQuizzes.innerHTML = /*HTML*/ `
     <h2 class="titulo-secao">Todos os Quizzes</h2>
   `;
-
+  console.log(quizzes)
   //Para cada quiz no vetor quizzes gera o render
   quizzes.forEach((quiz) => {
     const cardQuiz = document.createElement("div");
+    cardQuiz.dataset.quizzId = quiz.id;
     cardQuiz.classList.add("card-quiz");
     cardQuiz.innerHTML = /*HTML*/ `
       <h3 class="card-quiz__title">${quiz.title}</h3>
     `;
     cardQuiz.style.backgroundImage = `url(${quiz.image})`;
 
-    cardQuiz.onclick = () => clickCardQuizController();
+    cardQuiz.onclick = () => clickCardQuizController(event);
     todosOsQuizzes.appendChild(cardQuiz);
   });
 
@@ -58,8 +59,12 @@ function viewCardQuiz(quizzes) {
 }
 
 //controller
-function clickCardQuizController() {
-  console.log("clickCardQuizController");
+function clickCardQuizController(event) {
+  const clicado = event.currentTarget;
+  const quizzId = clicado.dataset.quizzId;
+  console.log(typeof(clicado));
+  console.log(clicado);
+  começarQuizz(quizzId);
 }
 
 function btnAddQuizClickController() {
