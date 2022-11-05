@@ -67,6 +67,8 @@ const novoQuiz = {
 	]
 }
 
+let numDeNiveis;
+
 const infoBasica = () => {
   app.innerHTML = "";
   viewInfoBasic();
@@ -104,7 +106,7 @@ function viewInfoBasic() {
        />
      </div>
 
-     <button type="submit" class="btnProsseguirPerguntas" onclick='nextPage(event)'>
+     <button type="submit" class="btnProsseguir" onclick='nextPage(event)'>
        Prosseguir pra criar perguntas
      </button>
    </form>
@@ -186,7 +188,7 @@ function nextPage(e) {
     const titulo = document.querySelector(".quizz-titulo").value;
     const imagem = document.querySelector(".quizz-imagem").value;
     const numDePerguntas = Number(document.querySelector(".quizz-num-perguntas").value);
-    const numDeNiveis = Number(document.querySelector(".quizz-num-niveis").value);
+    numDeNiveis = Number(document.querySelector(".quizz-num-niveis").value);
 
     novoQuiz.title = titulo;
     novoQuiz.image = imagem;

@@ -22,13 +22,12 @@
       <h1>BuzzQuizz</h1>
     </header>
     <main class="app">
-      
       <div class="criar-quizz">
-        <h2 class="criar-quizz__titulo">Crie suas perguntas</h2>
+        <h2 class="criar-quizz__titulo">Agora, decida os níveis</h2>
         <form class="criar-quizz__form">
-          <section class="pergunta-1 wrapper">
-            <section class="pergunta">
-              <h3>Pergunta 1</h3>
+          <section class="nivel-1 wrapper">
+            <section class="nivel">
+              <h3>Nível 1</h3>
               <img
                 src="./imagens/editar-icone.svg"
                 alt="editar"
@@ -36,169 +35,29 @@
                 onclick="btnEditarPerguntaClickController(this)"
               />
               <input
-                id="pergunta-1"
+                id="nivel-1"
                 type="text"
                 class="quizz-input"
-                placeholder="Texto da pergunta"
+                placeholder="Título do nível"
               />
               <input
-                id="pergunta-1-cor"
+                id="nivel-1-acerto-minino"
                 type="text"
                 class="quizz-input"
-                placeholder="Cor de fundo da pergunta"
-              />
-            </section>
-
-            <section class="respostas-corretas">
-              <h3>Resposta correta</h3>
-              <input
-                id="pergunta-1-resposta-correta"
-                type="text"
-                class="quizz-input"
-                placeholder="Resposta correta"
+                placeholder="% de acerto mínima"
               />
               <input
-                id="pergunta-1-resposta-correta-imagem"
+                id="nivel-1-imagem"
                 type="text"
                 class="quizz-input"
-                placeholder="URL da imagem"
-              />
-            </section>
-
-            <section class="respostas-incorretas">
-              <h3>Resposta incorreta</h3>
-              <div>
-                <input
-                  id="pergunta-1-resposta-incorreta-1"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 1"
-                />
-                <input
-                  id="pergunta-1-resposta-incorreta-imagem-1"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 1"
-                />
-              </div>
-
-              <div>
-                <input
-                  id="pergunta-1-resposta-incorreta-2"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 2"
-                />
-                <input
-                  id="pergunta-1-resposta-incorreta-imagem-2"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 2"
-                />
-              </div>
-
-              <div>
-                <input
-                  id="pergunta-1-resposta-incorreta-3"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 3"
-                />
-                <input
-                  id="pergunta-1-resposta-incorreta-imagem-3"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 3"
-                />
-              </div>
-            </section>
-          </section>
-
-          <section class="pergunta-2 wrapper pergunta--minimizada">
-            <section class="pergunta">
-              <h3>Pergunta 2</h3>
-              <img
-                src="./imagens/editar-icone.svg"
-                alt="editar"
-                class="btn-editar-pergunta"
-                onclick="btnEditarPerguntaClickController(this)"
+                placeholder="URL da imagem do nível"
               />
               <input
-                id="pergunta-2"
+                id="nivel-1-descricao"
                 type="text"
                 class="quizz-input"
-                placeholder="Texto da pergunta"
+                placeholder="Descrição do nível"
               />
-              <input
-                id="pergunta-2-cor"
-                type="text"
-                class="quizz-input"
-                placeholder="Cor de fundo da pergunta"
-              />
-            </section>
-
-            <section class="respostas-corretas">
-              <h3>Resposta correta</h3>
-              <input
-                id="pergunta-2-resposta-correta"
-                type="text"
-                class="quizz-input"
-                placeholder="Resposta correta"
-              />
-              <input
-                id="pergunta-2-resposta-correta-imagem"
-                type="text"
-                class="quizz-input"
-                placeholder="URL da imagem"
-              />
-            </section>
-
-            <section class="respostas-incorretas">
-              <h3>Resposta incorreta</h3>
-              <div>
-                <input
-                  id="pergunta-2-resposta-incorreta-1"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 1"
-                />
-                <input
-                  id="pergunta-2-resposta-incorreta-imagem-1"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 1"
-                />
-              </div>
-
-              <div>
-                <input
-                  id="pergunta-2-resposta-incorreta-2"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 2"
-                />
-                <input
-                  id="pergunta-2-resposta-incorreta-imagem-2"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 2"
-                />
-              </div>
-
-              <div>
-                <input
-                  id="pergunta-2-resposta-incorreta-3"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="Resposta incorreta 3"
-                />
-                <input
-                  id="pergunta-2-resposta-incorreta-imagem-3"
-                  type="text"
-                  class="quizz-input"
-                  placeholder="URL da imagem 3"
-                />
-              </div>
             </section>
           </section>
 
@@ -209,8 +68,9 @@
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/listaDeQuizzes.js"></script>
+    <!-- <script src="./js/listaDeQuizzes.js"></script>
     <script src="./js/criar-quizz/infoBasica.js"></script>
-    <script src="./js/criar-quizz/criarPergunta.js"></script>
+    <script src="./js/criar-quizz/criarPergunta.js"></script> -->
+    <script src="./js/criar-quizz/criarNivel.js"></script>
   </body>
 </html>

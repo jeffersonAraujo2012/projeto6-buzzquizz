@@ -17,7 +17,7 @@ function criarPerguntas(numeroPerguntas) {
           console.log(perguntas);
           perguntas += /*HTML*/ `
             <section class="pergunta-${i} wrapper ${
-            i !== 1 ? "pergunta--minimizada" : ""
+            i !== 1 ? "wrapper--minimizada" : ""
           }">
               <section class="pergunta">
                 <h3>Pergunta ${i}</h3>
@@ -110,7 +110,7 @@ function criarPerguntas(numeroPerguntas) {
         return "" + perguntas;
       })()}
 
-      <button type="submit" class="btnProsseguirNiveis" onclick="btnProsseguirNiveisClickController(event)">
+      <button type="submit" class="btnProsseguir" onclick="btnProsseguirNiveisClickController(event)">
         Prosseguir pra criar níveis
       </button>
     </form>
@@ -220,8 +220,8 @@ function validarRespostasIncorretas() {
 
 function btnEditarPerguntaClickController(btn) {
   const sessao = btn.parentElement.parentElement;
-  sessao.classList.remove("pergunta--minimizada");
-  perguntaMaximizada.classList.add("pergunta--minimizada");
+  sessao.classList.remove("wrapper--minimizada");
+  perguntaMaximizada.classList.add("wrapper--minimizada");
   perguntaMaximizada = sessao;
   sessao.scrollIntoView(true, { behavior: "smooth" });
   window.scroll({ top: 70, left: 0, behavior: "smooth" });

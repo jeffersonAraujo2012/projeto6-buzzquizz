@@ -56,8 +56,7 @@
   font-style: italic;
 }
 
-.btnProsseguirPerguntas,
-.btnProsseguirNiveis {
+.btnProsseguir {
   width: 370px;
   padding: 14px 0;
   margin-top: 85px;
@@ -70,7 +69,10 @@
   background-color: #ec362d;
   border-radius: 15px;
   border: none;
+
+  cursor: pointer;
 }
+
 
 .wrapper {
   margin-bottom: 24px;
@@ -86,7 +88,8 @@
   margin-bottom: 28px;
 }
 
-.pergunta .btn-editar-pergunta {
+.pergunta .btn-editar-pergunta,
+.nivel .btn-editar-pergunta {
   display: none;
 }
 
@@ -110,27 +113,27 @@
   margin-bottom: 12px;
 }
 
-.pergunta--minimizada {
+.wrapper--minimizada {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
-.pergunta--minimizada * {
+.wrapper--minimizada * {
   display: none !important;
 }
 
-.pergunta--minimizada section:first-child {
+.wrapper--minimizada section:first-child {
   display: flex !important;
   flex-direction: row;
   margin-bottom: 0;
 }
 
-.pergunta--minimizada section:first-child h3 {
+.wrapper--minimizada section:first-child h3 {
   display: block !important;
   margin: 24px 0;
 }
 
-.pergunta--minimizada .btn-editar-pergunta {
+.wrapper--minimizada .btn-editar-pergunta {
   display: block !important;
   margin-left: auto;
 
@@ -152,8 +155,7 @@
     margin: 37px 0 29px;
   }
 
-  .btnProsseguirPerguntas,
-  .btnProsseguirNiveis {
+  .btnProsseguir {
     margin-top: 28px;
   }
 }
