@@ -59,11 +59,12 @@ function viewCardQuiz(quizzes) {
 }
 
 //controller
+let quizzId;
 function clickCardQuizController(event) {
   const clicado = event.currentTarget;
-  const quizzId = clicado.dataset.quizzId;
-  console.log(typeof(clicado));
-  console.log(clicado);
+  quizzId = clicado.dataset.quizzId;
+  // console.log(typeof(clicado));
+  // console.log(clicado);
   começarQuizz(quizzId);
 }
 

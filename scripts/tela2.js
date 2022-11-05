@@ -1,6 +1,11 @@
-let resposta, resposta2, resposta3, resposta4;
 let quizz;
 let arr = [];
+let qtdRespondida = 0;
+let qtdAcertos = 0;
+let percentualAcertos = 0;
+let resultadoTitle = '';
+let resultadoImage = '';
+let resultadoText = '';
 
 // começarQuizz();
 function começarQuizz(quizzId) {
@@ -28,7 +33,7 @@ function responderQuizz(quizzes, quizzId) {
     const containerTela2 = document.querySelector(".container-tela2");
     for (let i = 0; i < quizz.questions.length; i++) {
         containerTela2.innerHTML += /*HTML*/
-            `<div class="container-quizz container${i}" id="primeiro">
+            `<div class="container-quizz container${i}" data-pergunta=${i}>
         <div class="container-pergunta pergunta${i}">
             <div class="pergunta">${quizz.questions[i].title}</div>
         </div>`
@@ -62,41 +67,108 @@ function responderQuizz(quizzes, quizzId) {
     }
 }
 
-let i = 0;
+
 function receberResposta(selected) {
+    const perguntaPertencente = selected.parentElement.dataset.pergunta;
 
-    //if (resposta !== undefined) return;
-    console.log(selected);
-    resposta = selected;
-
-    for (let j = 0; j < quizz.questions[i].answers.length; j++) {
-        //console.log(quizz.questions[i].answers[j].isCorrectAnswer)
-        if (quizz.questions[i].answers[j].isCorrectAnswer === true) {
-            const certa = document.querySelector(`.container${i} .opção${j}`);
+    for (let j = 0; j < quizz.questions[perguntaPertencente].answers.length; j++) {
+        if (quizz.questions[perguntaPertencente].answers[j].isCorrectAnswer === true) {
+            const certa = document.querySelector(`.container${perguntaPertencente} .opção${j}`);
             certa.classList.add("resposta-correta");
             certa.removeAttribute('onclick');
-            //console.log("entrou")
         } else {
-            const errada = document.querySelector(`.container${i} .opção${j}`);
+            const errada = document.querySelector(`.container${perguntaPertencente} .opção${j}`);
             errada.classList.add("resposta-errada");
             errada.removeAttribute('onclick');
-            //console.log("entrouElse")
         }
-        let caixaBranca = document.querySelector(`.container${i} .opção${j}`);
-        if (!resposta.isEqualNode(caixaBranca)) {
+        let caixaBranca = document.querySelector(`.container${perguntaPertencente} .opção${j}`);
+        if (!selected.isEqualNode(caixaBranca)) {
             caixaBranca.innerHTML += /*HTML*/`<div class="caixa-branca"></div>`;
         }
     }
-    i++;
+    if (selected.classList.contains("correctOne")) {
+        qtdAcertos++;
+    }
+
     setTimeout(rolarProximoQuizz, 2000);
     function rolarProximoQuizz() {
-        const proximoQuizz = document.querySelector(`.container${i}`);
-        proximoQuizz.scrollIntoView({block: "center", behavior: "smooth"});
+        const proximoQuizz = document.querySelector(`.container${Number(perguntaPertencente) + 1}`);
+        proximoQuizz.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    qtdRespondida++;
+    if (qtdRespondida === quizz.questions.length) {
+        percentualAcertos = Math.floor((qtdAcertos / qtdRespondida) * 100);
+        pegandoResultado();
     }
 }
 
+function pegandoResultado() {
+    for (let i = quizz.levels.length - 1; i >= 0; i--) {
+        if (percentualAcertos > quizz.levels[i].minValue) {
+            level = i;
+            break;
+        }
+    }
+    resultadoTitle = quizz.levels[level].title;
+    resultadoImage = quizz.levels[level].image;
+    resultadoText = quizz.levels[level].text;
+    mostrarResultado();
+}
 
+function mostrarResultado() {
+    const containerTela2 = document.querySelector(".container-tela2");
+    containerTela2.innerHTML += /*HTML*/ `<div class="container-quizz container${qtdRespondida}">
+    <div class="container-titulo-resultado">
+      <div class="pergunta">${percentualAcertos}% de acerto: Você é ${resultadoTitle}</div>
+    </div>
+    <div class="container-level">
+      <img src=${resultadoImage}>
+      <p>${resultadoText}</p>
+    </div>
+  </div>
+  <div class="botoes">
+    <button onclick="reiniciarQuizz()" class="button-restart">Reiniciar Quizz</button>
+    <button onclick="voltarHome()" class="button-home">Voltar para home</button>
+  </div>`
+}
 
+// -------REINICIAR QUIZZ-------
+function reiniciarQuizz() {
+    console.log(quizzId);
+    const inicio = document.querySelector(".app");
+    inicio.scrollIntoView({ block: "start", behavior: "smooth" });
+
+    arr = [];
+    qtdRespondida = 0;
+    qtdAcertos = 0;
+    percentualAcertos = 0;
+    resultadoTitle = '';
+    resultadoImage = '';
+    resultadoText = '';
+    começarQuizz(quizzId);
+}
+
+function voltarHome() {
+    app.innerHTML = "";
+    arr = [];
+    qtdRespondida = 0;
+    qtdAcertos = 0;
+    percentualAcertos = 0;
+    resultadoTitle = '';
+    resultadoImage = '';
+    resultadoText = '';
+
+    const promiseQuizzess = axios.get(
+        "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+    );
+    promiseQuizzess.then((res) => {
+        viewMeusQuizzes();
+        viewCardQuiz(res.data);
+    });
+    promiseQuizzess.catch(() =>
+        console.log("Algo de errado ocorreu na requisição dos quizzes")
+    );
+}
 
 //embaralhar as respostas de cada pergunta
 function comparador() {
