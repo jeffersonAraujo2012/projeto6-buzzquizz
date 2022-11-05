@@ -2,6 +2,9 @@
 const app = document.querySelector(".app");
 app.innerHTML = "";
 
+const listaDeQuizzes = document.createElement("div");
+listaDeQuizzes.classList.add("lista-de-quizzes");
+
 //Solicita ao servidor as informações dos quizzes
 const promiseQuizzes = axios.get(
   "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
@@ -29,8 +32,8 @@ function viewMeusQuizzes() {
   btnAddQuiz.onclick = () => btnAddQuizClickController();
 
   meusQuizzesSection.appendChild(btnAddQuiz);
-
-  app.appendChild(meusQuizzesSection);
+  listaDeQuizzes.appendChild(meusQuizzesSection);
+  app.appendChild(listaDeQuizzes);
 }
 
 //Função que renderiza os cards dos quizzes e seçao 'todos os quizzes'
@@ -54,7 +57,7 @@ function viewCardQuiz(quizzes) {
     todosOsQuizzes.appendChild(cardQuiz);
   });
 
-  app.appendChild(todosOsQuizzes);
+  listaDeQuizzes.appendChild(todosOsQuizzes);
 }
 
 //controller

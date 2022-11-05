@@ -1,3 +1,72 @@
+const novoQuiz = {
+	title: "Título do quizz",
+	image: "https://http.cat/411.jpg",
+	questions: [
+		{
+			title: "Título da pergunta 1",
+			color: "#123456",
+			answers: [
+				{
+					text: "Texto da resposta 1",
+					image: "https://http.cat/411.jpg",
+					isCorrectAnswer: true
+				},
+				{
+					text: "Texto da resposta 2",
+					image: "https://http.cat/412.jpg",
+					isCorrectAnswer: false
+				}
+			]
+		},
+		{
+			title: "Título da pergunta 2",
+			color: "#123456",
+			answers: [
+				{
+					text: "Texto da resposta 1",
+					image: "https://http.cat/411.jpg",
+					isCorrectAnswer: true
+				},
+				{
+					text: "Texto da resposta 2",
+					image: "https://http.cat/412.jpg",
+					isCorrectAnswer: false
+				}
+			]
+		},
+		{
+			title: "Título da pergunta 3",
+			color: "#123456",
+			answers: [
+				{
+					text: "Texto da resposta 1",
+					image: "https://http.cat/411.jpg",
+					isCorrectAnswer: true
+				},
+				{
+					text: "Texto da resposta 2",
+					image: "https://http.cat/412.jpg",
+					isCorrectAnswer: false
+				}
+			]
+		}
+	],
+	levels: [
+		{
+			title: "Título do nível 1",
+			image: "https://http.cat/411.jpg",
+			text: "Descrição do nível 1",
+			minValue: 0
+		},
+		{
+			title: "Título do nível 2",
+			image: "https://http.cat/412.jpg",
+			text: "Descrição do nível 2",
+			minValue: 50
+		}
+	]
+}
+
 const infoBasica = () => {
   app.innerHTML = "";
   viewInfoBasic();
@@ -114,7 +183,14 @@ function nextPage(e) {
     validarNumPerguntas() &&
     validarNumNiveis()
   ) {
-    console.log("PRÓXIMA PÁGINA CHAMADA");
+    const titulo = document.querySelector(".quizz-titulo").value;
+    const imagem = document.querySelector(".quizz-imagem").value;
+    const numDePerguntas = Number(document.querySelector(".quizz-num-perguntas").value);
+    const numDeNiveis = Number(document.querySelector(".quizz-num-niveis").value);
+
+    novoQuiz.title = titulo;
+    novoQuiz.image = imagem;
+    criarPerguntas(numDePerguntas);
   } else {
     alert("Preencha corretamente os campos");
     console.log(validarTitulo());
