@@ -45,7 +45,12 @@ function viewMeusQuizzes() {
     const meusQuizzes = document.createElement("section"); //captura a area dos quizzes
     meusQuizzes.classList.add("meus-quizzes--preenchidos"); //adiciona a classe
     meusQuizzes.innerHTML = /*HTML*/ `
-      <h2 class="titulo-secao">Meus Quizzes</h2>
+      <div class="titulo-secao">
+        <h2>Seus Quizzes</h2>
+        <button class="btn-add-quizz" onclick="btnAddQuizClickController()">
+          <img src="./imagens/mais.svg" alt="adicionar quiz" />
+        </button>
+      </div>
     `;
 
     //Para cada quiz no vetor quizzes gera o render
@@ -53,7 +58,7 @@ function viewMeusQuizzes() {
       let promise = axios.get(
         `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`
       );
-      promise.then(res => {
+      promise.then((res) => {
         const cardQuiz = document.createElement("div");
         cardQuiz.classList.add("card-quiz");
         cardQuiz.innerHTML = /*HTML*/ `
@@ -63,7 +68,7 @@ function viewMeusQuizzes() {
 
         cardQuiz.onclick = () => clickCardQuizController();
         meusQuizzes.appendChild(cardQuiz);
-      }) 
+      });
     });
     listaDeQuizzes.appendChild(meusQuizzes);
     app.appendChild(listaDeQuizzes);
