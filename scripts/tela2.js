@@ -23,10 +23,11 @@ function responderQuizz(quizzes, quizzId) {
 
     console.log(quizzes);
     const app = document.querySelector(".app");
-    app.innerHTML = /*HTML*/`<div class="container-tela2">
+    app.innerHTML = /*HTML*/`
     <div class="cabeçalho-tela2">
-      <p class="titulo-quizz">${quizz.title}</p>
-    </div>`;
+    <p class="titulo-quizz">${quizz.title}</p></div>
+    <div class="container-tela2">
+    `;
     const cabeçalhoTela2 = document.querySelector(".cabeçalho-tela2");
     cabeçalhoTela2.style.backgroundImage = /*HTML*/`linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${quizz.image})`;
 
