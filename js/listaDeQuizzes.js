@@ -1,21 +1,24 @@
 //VIEW
 const app = document.querySelector(".app");
-app.innerHTML = "";
-
 const listaDeQuizzes = document.createElement("div");
 listaDeQuizzes.classList.add("lista-de-quizzes");
+homePage();
 
-//Solicita ao servidor as informações dos quizzes
-const promiseQuizzes = axios.get(
-  "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
-);
-promiseQuizzes.then((res) => {
-  viewMeusQuizzes();
-  viewCardQuiz(res.data);
-});
-promiseQuizzes.catch(() =>
-  console.log("Algo de errado ocorreu na requisição dos quizzes")
-);
+function homePage(){
+  app.innerHTML = "";
+  
+  //Solicita ao servidor as informações dos quizzes
+  const promiseQuizzes = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+  promiseQuizzes.then((res) => {
+    viewMeusQuizzes();
+    viewCardQuiz(res.data);
+  });
+  promiseQuizzes.catch(() =>
+    console.log("Algo de errado ocorreu na requisição dos quizzes")
+  );
+}
 
 //Funcao que renderiza a seçao 'meus quizzes'
 function viewMeusQuizzes() {

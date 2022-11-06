@@ -270,15 +270,17 @@ function btnProsseguirNiveisClickController(event) {
           `pergunta-${pergunta}-resposta-incorreta-imagem-${indice + 1}`
         ).value;
 
-        perguntas[pergunta-1].answers.push({
-          text: textoRespostaIncorreta,
-          image: imagemRespostaIncorreta,
-          isCorrectAnswer: false,
-        });
+        if (textoRespostaIncorreta && imagemRespostaIncorreta) {
+          perguntas[pergunta - 1].answers.push({
+            text: textoRespostaIncorreta,
+            image: imagemRespostaIncorreta,
+            isCorrectAnswer: false,
+          });
+        }
       });
     }
     novoQuiz.questions = perguntas;
-    console.log("TUDO OK");
+    criarNiveis();
   } else {
     console.log(validarPerguntas());
     console.log(validarCores());

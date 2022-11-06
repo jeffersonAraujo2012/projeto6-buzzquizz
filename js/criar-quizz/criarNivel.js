@@ -1,12 +1,8 @@
-let numDeNiveis = 2;
-const app = document.querySelector("main.app");
-app.innerHTML = "";
-
 let nivelMaximizado;
-criarNivel();
 
 //VIEW
-function criarNivel() {
+function criarNiveis() {
+  app.innerHTML = "";
   const criarNivel = document.createElement("div");
   criarNivel.classList.add("criar-quizz");
 
@@ -122,9 +118,9 @@ function validarImagens() {
 
 function validarDescricoes() {
   for (let nivel = 1; nivel <= numDeNiveis; nivel++) {
-    const titulo = document.getElementById(`nivel-${nivel}-descricao`).value;
-    const tamanhoTitulo = titulo.length;
-    if (tamanhoTitulo < 30) return false;
+    const descricao = document.getElementById(`nivel-${nivel}-descricao`).value;
+    const tamanhoDescricao = descricao.length;
+    if (tamanhoDescricao < 30) return false;
   }
 
   return true;
@@ -147,7 +143,29 @@ function btnProsseguirClickController(event) {
     validarImagens() &&
     validarDescricoes()
   ) {
-    console.log("Prosseguindo...")
+    let niveis = [];
+
+    for (let nivel = 1; nivel <= numDeNiveis; nivel++) {
+      const titulo = document.getElementById(`nivel-${nivel}`).value;
+      const porcentagem = document.getElementById(
+        `nivel-${nivel}-acerto-minino`
+      ).value;
+      const imagem = document.getElementById(`nivel-${nivel}-imagem`).value;
+      const descricao = document.getElementById(
+        `nivel-${nivel}-descricao`
+      ).value;
+
+      niveis.push({
+        title: titulo,
+        image: imagem,
+        text: descricao,
+        minValue: porcentagem,
+      });
+    }
+
+    novoQuiz.levels = niveis;
+    criarQuizz();
+    console.log("Prosseguindo...");
   } else {
     console.log(validarTitulos());
     console.log(validarPorcentagens());
