@@ -75,12 +75,14 @@
 }
 
 .card-quiz__title {
+  display: flex;
   width: 100%;
 
   color: white;
   font-size: 19px;
   line-height: 22px;
   text-align: left;
+  word-break: break-word;
 
   z-index: 2;
 }
