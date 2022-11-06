@@ -60,13 +60,14 @@ function viewMeusQuizzes() {
       );
       promise.then((res) => {
         const cardQuiz = document.createElement("div");
+        cardQuiz.dataset.quizzId = quizId;
         cardQuiz.classList.add("card-quiz");
         cardQuiz.innerHTML = /*HTML*/ `
           <h3 class="card-quiz__title">${res.data.title}</h3>
         `;
         cardQuiz.style.backgroundImage = `url(${res.data.image})`;
 
-        cardQuiz.onclick = () => clickCardQuizController();
+        cardQuiz.onclick = () => clickCardQuizController(event);
         meusQuizzes.appendChild(cardQuiz);
       });
     });

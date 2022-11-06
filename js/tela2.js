@@ -11,17 +11,13 @@ let resultadoText = '';
 function começarQuizz(quizzId) {
     app.innerHTML = '';
     const promessa = axios.get(
-        "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzId}`
     );
-    promessa.then((res) => responderQuizz(res.data, quizzId));
-
+    promessa.then((res) => responderQuizz(res.data));
 }
 
-function responderQuizz(quizzes, quizzId) {
-
-    quizz = quizzes.filter((quizz) => quizz.id == quizzId)[0];
-
-    console.log(quizzes);
+function responderQuizz(quizzRecebido) {
+    quizz = quizzRecebido;
     const app = document.querySelector(".app");
     app.innerHTML = /*HTML*/`
     <div class="cabeçalho-tela2">
