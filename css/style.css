@@ -38,14 +38,15 @@ header h1 {
 }
 
 main.app {
-  margin: 300px auto 0px auto;
-  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 69px 0;
+  width: 100%;
 }
 
 .cabeçalho-tela2 {
-  position: absolute;
-  top: 69px;
-  left: 0;
   width: 100%;
   min-width: 786px;
   height: 227px;
@@ -185,7 +186,6 @@ main.app {
 @media (max-width: 1100px) {
   main.app {
     padding: 0 18px;
-    margin: 210px auto 0px auto;
   }
   .container-level{
     flex-direction: column;

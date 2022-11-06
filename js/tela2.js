@@ -105,7 +105,7 @@ function receberResposta(selected) {
 
 function pegandoResultado() {
     for (let i = quizz.levels.length - 1; i >= 0; i--) {
-        if (percentualAcertos > quizz.levels[i].minValue) {
+        if (percentualAcertos >= quizz.levels[i].minValue) {
             level = i;
             break;
         }

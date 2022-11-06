@@ -1,36 +1,78 @@
 //VIEW
 const app = document.querySelector(".app");
-app.innerHTML = "";
+const listaDeQuizzes = document.createElement("div");
+listaDeQuizzes.classList.add("lista-de-quizzes");
+homePage();
 
-//Solicita ao servidor as informações dos quizzes
-const promiseQuizzes = axios.get(
-  "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
-);
-promiseQuizzes.then((res) => {
-  viewMeusQuizzes();
-  viewCardQuiz(res.data);
-});
-promiseQuizzes.catch(() =>
-  console.log("Algo de errado ocorreu na requisição dos quizzes")
-);
+function homePage() {
+  app.innerHTML = "";
+
+  //Solicita ao servidor as informações dos quizzes
+  const promiseQuizzes = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+  promiseQuizzes.then((res) => {
+    viewMeusQuizzes();
+    viewCardQuiz(res.data);
+  });
+  promiseQuizzes.catch(() =>
+    console.log("Algo de errado ocorreu na requisição dos quizzes")
+  );
+}
 
 //Funcao que renderiza a seçao 'meus quizzes'
 function viewMeusQuizzes() {
-  const meusQuizzesSection = document.createElement("section");
-  meusQuizzesSection.classList.add("meus-quizzes");
+  let quizzes = localStorage.getItem("meus-quizzes");
 
-  meusQuizzesSection.innerHTML = /*HTML*/ `
-    <p>Você não criou nenhum quizz ainda :(</p>
-  `;
-  const btnAddQuiz = document.createElement("button");
-  btnAddQuiz.classList.add("meus-quizzes__btn-add-quiz");
-  btnAddQuiz.innerHTML = "Criar Quizz";
+  if (quizzes === null) {
+    const meusQuizzesSection = document.createElement("section");
+    meusQuizzesSection.classList.add("meus-quizzes");
 
-  btnAddQuiz.onclick = () => btnAddQuizClickController();
+    meusQuizzesSection.innerHTML = /*HTML*/ `
+      <p>Você não criou nenhum quizz ainda :(</p>
+    `;
+    const btnAddQuiz = document.createElement("button");
+    btnAddQuiz.classList.add("meus-quizzes__btn-add-quiz");
+    btnAddQuiz.innerHTML = "Criar Quizz";
 
-  meusQuizzesSection.appendChild(btnAddQuiz);
+    btnAddQuiz.onclick = () => btnAddQuizClickController();
 
-  app.appendChild(meusQuizzesSection);
+    meusQuizzesSection.appendChild(btnAddQuiz);
+    listaDeQuizzes.appendChild(meusQuizzesSection);
+    app.appendChild(listaDeQuizzes);
+  } else {
+    quizzes = JSON.parse(quizzes);
+    const meusQuizzes = document.createElement("section"); //captura a area dos quizzes
+    meusQuizzes.classList.add("meus-quizzes--preenchidos"); //adiciona a classe
+    meusQuizzes.innerHTML = /*HTML*/ `
+      <div class="titulo-secao">
+        <h2>Seus Quizzes</h2>
+        <button class="btn-add-quizz" onclick="btnAddQuizClickController()">
+          <img src="./imagens/mais.svg" alt="adicionar quiz" />
+        </button>
+      </div>
+    `;
+
+    //Para cada quiz no vetor quizzes gera o render
+    quizzes.forEach((quizId) => {
+      let promise = axios.get(
+        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`
+      );
+      promise.then((res) => {
+        const cardQuiz = document.createElement("div");
+        cardQuiz.classList.add("card-quiz");
+        cardQuiz.innerHTML = /*HTML*/ `
+          <h3 class="card-quiz__title">${res.data.title}</h3>
+        `;
+        cardQuiz.style.backgroundImage = `url(${res.data.image})`;
+
+        cardQuiz.onclick = () => clickCardQuizController();
+        meusQuizzes.appendChild(cardQuiz);
+      });
+    });
+    listaDeQuizzes.appendChild(meusQuizzes);
+    app.appendChild(listaDeQuizzes);
+  }
 }
 
 //Função que renderiza os cards dos quizzes e seçao 'todos os quizzes'
@@ -55,7 +97,7 @@ function viewCardQuiz(quizzes) {
     todosOsQuizzes.appendChild(cardQuiz);
   });
 
-  app.appendChild(todosOsQuizzes);
+  listaDeQuizzes.appendChild(todosOsQuizzes);
 }
 
 //controller
@@ -69,6 +111,7 @@ function clickCardQuizController(event) {
 }
 
 function btnAddQuizClickController() {
+  infoBasica();
   console.log("btnAddQuizClickController");
 }
 
