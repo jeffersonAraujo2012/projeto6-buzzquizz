@@ -1,71 +1,71 @@
 const novoQuiz = {
-	title: "Título do quizz",
-	image: "https://http.cat/411.jpg",
-	questions: [
-		{
-			title: "Título da pergunta 1",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 2",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		},
-		{
-			title: "Título da pergunta 3",
-			color: "#123456",
-			answers: [
-				{
-					text: "Texto da resposta 1",
-					image: "https://http.cat/411.jpg",
-					isCorrectAnswer: true
-				},
-				{
-					text: "Texto da resposta 2",
-					image: "https://http.cat/412.jpg",
-					isCorrectAnswer: false
-				}
-			]
-		}
-	],
-	levels: [
-		{
-			title: "Título do nível 1",
-			image: "https://http.cat/411.jpg",
-			text: "Descrição do nível 1",
-			minValue: 0
-		},
-		{
-			title: "Título do nível 2",
-			image: "https://http.cat/412.jpg",
-			text: "Descrição do nível 2",
-			minValue: 50
-		}
-	]
-}
+  title: "Título do quizz",
+  image: "https://http.cat/411.jpg",
+  questions: [
+    {
+      title: "Título da pergunta 1",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+    {
+      title: "Título da pergunta 2",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+    {
+      title: "Título da pergunta 3",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+  ],
+  levels: [
+    {
+      title: "Título do nível 1",
+      image: "https://http.cat/411.jpg",
+      text: "Descrição do nível 1",
+      minValue: 0,
+    },
+    {
+      title: "Título do nível 2",
+      image: "https://http.cat/412.jpg",
+      text: "Descrição do nível 2",
+      minValue: 50,
+    },
+  ],
+};
 
 let numDeNiveis;
 
@@ -129,7 +129,7 @@ function validarTitulo() {
   ) {
     return true;
   } else {
-    return false;
+    throw "O titulo da pergunta precisa ter entre 20 e 65 caracteres";
   }
 }
 
@@ -143,7 +143,7 @@ function validarURL() {
   if (ehURL) {
     return true;
   } else {
-    return false;
+    throw "O campo de imagem precisa ser preenchido com uma URL";
   }
 }
 
@@ -158,7 +158,7 @@ function validarNumPerguntas() {
   if (quizzNumPerguntasValue >= 3) {
     return true;
   } else {
-    return false;
+    throw "O numero de perguntas deve ser no mínimo 3";
   }
 }
 
@@ -173,31 +173,32 @@ function validarNumNiveis() {
   if (quizzNumNiveisValue >= 2) {
     return true;
   } else {
-    return false;
+    throw "O numero de níveis deve ser no mínimo 2";
   }
 }
 
 function nextPage(e) {
   e.preventDefault();
-  if (
-    validarTitulo() &&
-    validarURL() &&
-    validarNumPerguntas() &&
-    validarNumNiveis()
-  ) {
-    const titulo = document.querySelector(".quizz-titulo").value;
-    const imagem = document.querySelector(".quizz-imagem").value;
-    const numDePerguntas = Number(document.querySelector(".quizz-num-perguntas").value);
-    numDeNiveis = Number(document.querySelector(".quizz-num-niveis").value);
 
-    novoQuiz.title = titulo;
-    novoQuiz.image = imagem;
-    criarPerguntas(numDePerguntas);
-  } else {
-    alert("Preencha corretamente os campos");
-    console.log(validarTitulo());
-    console.log(validarURL());
-    console.log(validarNumPerguntas());
-    console.log(validarNumNiveis());
+  try {
+    if (
+      validarTitulo() &&
+      validarURL() &&
+      validarNumPerguntas() &&
+      validarNumNiveis()
+    ) {
+      const titulo = document.querySelector(".quizz-titulo").value;
+      const imagem = document.querySelector(".quizz-imagem").value;
+      const numDePerguntas = Number(
+        document.querySelector(".quizz-num-perguntas").value
+      );
+      numDeNiveis = Number(document.querySelector(".quizz-num-niveis").value);
+
+      novoQuiz.title = titulo;
+      novoQuiz.image = imagem;
+      criarPerguntas(numDePerguntas);
+    }
+  } catch (e) {
+    alert(e);
   }
 }
